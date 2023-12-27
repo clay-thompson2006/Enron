@@ -25,7 +25,7 @@ async def verification_log(user,interaction,status):
             channel = interaction.guild.get_channel(guild_data['log_channel'])
             embed = discord.Embed(title=f"{user}'s Verification Results:")
             embed.set_footer(text=user.name, icon_url=user.avatar.url)
-            embed.set_thumbnail(url=interaction.guild.icon.url)
+            embed.set_thumbnail(url=interaction.guild.icon.url or None)
             description= f'**Member**: {user} ({user.id})\n**Creation**: `{user.created_at.strftime("%H:%M %p %B %d, %Y")}`'
             if status == 'Verified':
                 embed.color = config.embed_color_success
