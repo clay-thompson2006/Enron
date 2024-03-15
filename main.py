@@ -24,6 +24,16 @@ collection_users = database.get_collection("users")
 collection_guilds = database.get_collection("guilds")
 
 
+@bot.event
+async def on_member_join(member):
+    channel = discord.utils.get(member.guild.text_channels, name='welcome')
+    if channel is not None:
+        embed = discord.Embed(title="Welcome!", description=f"Welcome {member.mention} to our server!", color=discord.Color.green())
+        embed.set_footer(text="Welcome to our server!")
+        await channel.send(embed=embed)
+
+
+
 @tasks.loop(seconds=300)
 async def update_status():
         await bot.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="Sampath#6145"))
@@ -217,4 +227,8 @@ async def on_application_command_error(ctx: discord.ApplicationContext, error: d
     else:
         raise error 
 keep_alive()
+
+
+
+
 bot.run(config.bot_token)
